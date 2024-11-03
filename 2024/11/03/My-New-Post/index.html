@@ -17,7 +17,7 @@
 
 
 
-<title>Hello World | 0xGINA&#39;s Blog</title>
+<title>My New Post | 0xGINA&#39;s Blog</title>
 
 
 
@@ -131,76 +131,11 @@
                 <div class="container">
     
     
-        <div class="post-toc">
-    <div class="tocbot-list">
-    </div>
-    <div class="tocbot-list-menu">
-        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
-        <a onclick="go_top()">Back to top</a>
-        <a onclick="go_bottom()">Go to bottom</a>
-    </div>
-</div>
-
-<script>
-    var tocbot_timer;
-    var DEPTH_MAX = 6; // 为 6 时展开所有
-    var tocbot_default_config = {
-        tocSelector: '.tocbot-list',
-        contentSelector: '.post-content',
-        headingSelector: 'h1, h2, h3, h4, h5',
-        orderedList: false,
-        scrollSmooth: true,
-        onClick: extend_click,
-    };
-
-    function extend_click() {
-        clearTimeout(tocbot_timer);
-        tocbot_timer = setTimeout(function() {
-            tocbot.refresh(obj_merge(tocbot_default_config, {
-                hasInnerContainers: true
-            }));
-        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
-    }
-
-    document.ready(function() {
-        tocbot.init(obj_merge(tocbot_default_config, {
-            collapseDepth: 1
-        }));
-    });
-
-    function expand_toc() {
-        var b = document.querySelector('.tocbot-toc-expand');
-        var expanded = b.getAttribute('data-expanded');
-        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
-        tocbot.refresh(obj_merge(tocbot_default_config, {
-            collapseDepth: expanded ? 1 : DEPTH_MAX
-        }));
-        b.innerText = expanded ? 'Expand all' : 'Collapse all';
-    }
-
-    function go_top() {
-        window.scrollTo(0, 0);
-    }
-
-    function go_bottom() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    function obj_merge(target, source) {
-        for (var item in source) {
-            if (source.hasOwnProperty(item)) {
-                target[item] = source[item];
-            }
-        }
-        return target;
-    }
-</script>
-    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Hello World</h1>
+            <h1 class="post-title">My New Post</h1>
             
                 <div class="post-meta">
                     
@@ -209,7 +144,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">九月 9, 2024&nbsp;&nbsp;11:55:35</a>
+                        Date: <a href="#">十一月 3, 2024&nbsp;&nbsp;21:09:25</a>
                         </span>
                     
                     
@@ -218,19 +153,42 @@
         </header>
 
         <div class="post-content">
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+            <p>基础 <a target="_blank" rel="noopener" href="https://github.com/coderit666/GoGuide">https://github.com/coderit666/GoGuide</a><br><a target="_blank" rel="noopener" href="https://www.bytesizego.com/blog/learning-golang-2024">https://www.bytesizego.com/blog/learning-golang-2024</a><br><a target="_blank" rel="noopener" href="https://github.com/yangwenmai/learning-golang">https://github.com/yangwenmai/learning-golang</a></p>
+<p>[图片]<br>[图片]<br>[图片]<br>[图片]<br>暂时无法在飞书文档外展示此内容<br>在 Go 语言中，字符串是由两部分组成的：</p>
+<ol>
+<li>字符串的长度：告诉我们字符串包含多少个字符。</li>
+<li>指向字符串内容的指针：指向存储字符串实际字符数据的地方。</li>
+</ol>
+<ul>
+<li>指针：它指向字符串数据的实际存储位置。通常，在 64 位系统中，这个指针占用 8 字节。</li>
+<li>长度：这是一个整数，用来表示字符串的长度。在 64 位系统中，整数类型通常占用 8 字节。<br>因此，字符串的总大小计算如下：</li>
+<li>指针（8 字节）</li>
+<li>长度（8 字节）<br>8 字节 (指针)+8 字节 (长度)&#x3D;16 字节<br>暂时无法在飞书文档外展示此内容<br>暂时无法在飞书文档外展示此内容<br>Go 内存区域划分<br>Go 语言中，内存通常分为三大区域：</li>
+<li>全局静态区：存储全局变量和常量。这些变量和常量在程序启动时分配内存，并在程序结束时释放。<br>就像是家里的储藏室，存放不常变动的东西。</li>
+<li>堆：存储动态分配的内存，通常用于需要在多个函数间共享的对象。堆上的数据需要手动管理或由 Go 的垃圾回收机制负责清理。<br>就像是客厅，存放大家共用的大件物品，需要定期打扫。</li>
+<li>栈：用于函数调用时<br>就像是临时操作台，每次做饭（函数调用）时使用，做完饭后就清理。</li>
+</ul>
+<p>在Go语言中，逃逸分析（escape analysis）是一种编译期优化技术，用于确定局部变量的存储位置。如果变量只在当前函数内部使用，并且没有被传递到其他函数或goroutine，那么这个变量通常存储在栈（stack）上。如果变量的生命周期超出了当前函数，比如被返回或传递给了其他goroutine，那么这个变量就会“逃逸”到堆（heap）上。<br>让我们用大白话来解释一下这个过程：<br>逃逸分析是什么？<br>逃逸分析就像是侦探工作，编译器像侦探一样，追踪每个局部变量的去向。如果变量只在当前函数内部使用，那么它就老老实实地呆在栈上。但如果变量被带出了当前函数，比如被函数返回，或者被发送到另一个goroutine，那么它就需要一个更长久的家——堆。<br>为什么变量会逃逸到堆上？</p>
+<ol>
+<li>变量被返回：</li>
+</ol>
+<ul>
+<li>如果一个变量的地址被返回，那么它可能被其他函数长时间持有，所以它需要存储在堆上，以免在函数返回后被销毁。</li>
+</ul>
+<ol start="2">
+<li>变量被传递给goroutine：</li>
+</ol>
+<ul>
+<li>如果一个变量被传递给一个新的goroutine，那么它的生命周期就不再局限于当前函数，它需要在堆上分配内存，以确保在goroutine执行期间变量仍然有效。</li>
+<li>什么时候会发生：<ul>
+<li>如果局部变量的生命周期超出了它所在的函数，比如被函数返回或者被传递给了其他的goroutine，那么它就需要一个更长久的存储位置，这时候它就会“逃逸”到堆上。</li>
+</ul>
+</li>
+<li>堆的作用：<ul>
+<li>堆就像是家里的储藏室，用来存放那些需要长时间保存的东西。在Go语言中，当局部变量逃逸到堆上时，就意味着它们被分配在堆上，可以被程序的其他部分长期访问。</li>
+</ul>
+</li>
+</ul>
 
         </div>
 
@@ -245,7 +203,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://ginayy.github.io/2024/09/09/hello-world/">http://ginayy.github.io/2024/09/09/hello-world/</a></span>
+                        <span><a href="http://ginayy.github.io/2024/11/03/My-New-Post/">http://ginayy.github.io/2024/11/03/My-New-Post/</a></span>
                     </p>
                 
                 
@@ -278,8 +236,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2024/11/03/My-New-Post/">My New Post</a>
             
+            <a class="next" rel="next" href="/2024/09/09/hello-world/">Hello World</a>
             
         </section>
 
