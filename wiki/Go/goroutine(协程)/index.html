@@ -41,8 +41,8 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125712.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125728.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125802.png">
-<meta property="article:published_time" content="2024-11-13T04:58:12.796Z">
-<meta property="article:modified_time" content="2024-11-13T04:58:12.796Z">
+<meta property="article:published_time" content="2024-11-13T06:06:10.660Z">
+<meta property="article:modified_time" content="2024-11-13T06:06:10.660Z">
 <meta property="article:author" content="GINA">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125052.png">
@@ -98,7 +98,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki">Wiki</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)/index.html">Go</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">Updated on: <time datetime="2024-11-13T04:58:12.796Z">2024-11-13</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">Updated on: <time datetime="2024-11-13T06:06:10.660Z">2024-11-13</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -152,7 +152,7 @@
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125308.png"></p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125330.png"></p>
 <p>&#x20; 每个线程约需 4MB 内存，大量线程会导致内存消耗过高。应用层无法直接控制内核调度，只能通过减少线程创建和切换来优化性能。这促生了<strong>协程</strong>的概念：用户级别的轻量线程。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="协程（Coroutine）（并发执行）"><a href="#协程（Coroutine）（并发执行）" class="headerlink" title="协程（Coroutine）（并发执行）"></a>协程（Coroutine）（并发执行）</h3><ul>
+<h3 id="协程（Coroutine）（并发执行）"><a href="#协程（Coroutine）（并发执行）" class="headerlink" title="协程（Coroutine）（并发执行）"></a>协程（Coroutine）（并发执行）</h3><ul>
 <li><p><strong>定义</strong>：协程是一种程序组件，它允许挂起和恢复执行。goroutine是由<strong>Go运行时管理的轻量级线程</strong>，与coroutine只能运行在一个线程上不同，<strong>goroutine可以运行在一个或多个线程上</strong>。</p>
 </li>
 <li><p><strong>轻量级</strong>：goroutine比线程更加轻量级，因为它们的栈是动态的，并且可以在运行时调整大小，它们的堆栈大小只有几 kb，并且堆栈可以根据应用程序的需要进行扩展和收缩，而对于线程，则必须指定堆栈大小并固定堆栈大小。</p>
@@ -191,7 +191,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h3 id="goroutine-的基本使用"><a href="#goroutine-的基本使用" class="headerlink" title="goroutine 的基本使用"></a>goroutine 的基本使用</h3><p><code>goroutine</code> 是 Go 中的轻量级线程，启动一个 <code>goroutine</code> 只需要使用 <code>go</code> 关键字，非常高效。每个 <code>goroutine</code> 都是独立的，多个 <code>goroutine</code> 可以并发执行。</p>
+<h3 id="goroutine-的基本使用"><a href="#goroutine-的基本使用" class="headerlink" title="goroutine 的基本使用"></a>goroutine 的基本使用</h3><p><code>goroutine</code> 是 Go 中的轻量级线程，启动一个 <code>goroutine</code> 只需要使用 <code>go</code> 关键字，非常高效。每个 <code>goroutine</code> 都是独立的，多个 <code>goroutine</code> 可以并发执行。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (  </span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func hello() &#123;  </span><br><span class="line">    fmt.Println(&quot;Hello world goroutine&quot;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">func main() &#123;  </span><br><span class="line">    go hello()</span><br><span class="line">    fmt.Println(&quot;main function&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func printNumbers() &#123;</span><br><span class="line">    for i := 1; i &lt;= 5; i++ &#123;</span><br><span class="line">        fmt.Println(i)</span><br><span class="line">        time.Sleep(100 * time.Millisecond) // 延迟 100 毫秒</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    go printNumbers() // 启动一个新的 goroutine，并发执行 printNumbers 函数</span><br><span class="line">    fmt.Println(&quot;这是在主 goroutine 中&quot;)</span><br><span class="line"></span><br><span class="line">    time.Sleep(600 * time.Millisecond) // 等待 printNumbers 执行完</span><br><span class="line">    fmt.Println(&quot;主 goroutine 结束&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -221,14 +221,9 @@
 <li><p>**全局队列&#x20;**： 用于存放那些因为本地队列已满而无法加入的 Goroutine。全局队列是一个共享资源，所有逻辑处理器（P）都可以从中获取 Goroutine 来执行。</p>
 </li>
 </ol>
-<h3 id="GMP模型的工作原理"><a href="#GMP模型的工作原理" class="headerlink" title="GMP模型的工作原理"></a>GMP模型的工作原理</h3><ul>
-<li><p>**Goroutine (G)**：比作一个快递包裹。</p>
-</li>
-<li><p>**线程 (M)**：比作一个分拣员。</p>
-</li>
-<li><p>**逻辑处理器 (P)**：比作分拣员的工作台。</p>
-</li>
-</ul>
+<h3 id="GMP模型的工作原理"><a href="#GMP模型的工作原理" class="headerlink" title="GMP模型的工作原理"></a>GMP模型的工作原理</h3><p> **Goroutine (G)**：比作一个快递包裹。</p>
+<p> **线程 (M)**：比作一个分拣员。</p>
+<p> **逻辑处理器 (P)**：比作分拣员的工作台。</p>
 <hr>
 <ol>
 <li><strong>G与M的绑定机制</strong>：</li>
@@ -236,21 +231,21 @@
 <p><strong>（包裹和分拣员的关系）</strong>：</p>
 <p>想象一下，快递包裹（Goroutine）送到分拣中心后，并不是直接交给某个分拣员（线程），而是先放在分拣员的工作台（逻辑处理器 P）上的包裹堆里。分拣员（M）会从自己工作台上的包裹堆里拿包裹来分拣。</p>
 <p>Goroutine并不直接绑定到操作系统线程上，而是通过P来调度。当一个M需要执行工作时，它会从与之关联的P的本地队列中取出一个Goroutine来执行。如果M完成了G的执行或者G被阻塞，M会再次从P的队列中取出另一个G来执行。</p>
-<ul>
+<ol start="2">
 <li><strong>P的本地运行队列</strong>：</li>
-</ul>
+</ol>
 <p><strong>（工作台上的包裹堆）</strong>：</p>
 <p>每个分拣员的工作台（P）上都有一个包裹堆，用来存放等待分拣的包裹。如果分拣员的工作台上没有包裹了，他会去中心的包裹池（全局运行队列）里拿，或者从其他分拣员的工作台上“偷”几个包裹来分拣，这就是工作窃取。</p>
 <p>每个P都有一个本地运行队列，用于存储准备好执行的Goroutine。当P的本地队列为空时，它会尝试从全局运行队列或者其他P的本地队列中“偷取”Goroutine来执行，这种策略称为工作窃取（<strong>Work Stealing</strong>）。</p>
-<ul>
+<ol start="3">
 <li><strong>M的休眠与唤醒</strong>：</li>
-</ul>
+</ol>
 <p><strong>（分拣员的休息与工作）</strong>：</p>
 <p>如果一个分拣员发现自己工作台上没有包裹了，而且中心的包裹池里也没有包裹，他可能会暂时休息，不消耗体力。如果有新的包裹送来，或者有包裹从其他工作台“偷”过来，休息的分拣员会被叫醒来继续工作。</p>
 <p>当M在其关联的P的本地队列中找不到可运行的G时，它可能会进入休眠状态。在休眠状态下，M不会消耗CPU资源。当新的Goroutine被创建或者有Goroutine变为可运行状态时，休眠中的M可以被唤醒来处理这些任务。</p>
-<ul>
+<ol start="4">
 <li><strong>G的状态转换</strong>：</li>
-</ul>
+</ol>
 <p><strong>（包裹的处理过程）</strong>：</p>
 <ul>
 <li><p>快递包裹在分拣过程中会经历几个状态：</p>
@@ -297,7 +292,10 @@
 <li><p><strong>M0</strong>：程序启动后的第一个主线程（M0）负责执行初始化操作和启动第一个 Goroutine。此后，M0 的行为与其他线程（M）相同。</p>
 </li>
 </ol>
-<h3 id="x20"><a href="#x20" class="headerlink" title="&#x20;"></a><strong>&#x20;</strong></h3><p>接下来我们来针对上面的代码对调度器里面的结构做一个分析。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Println(&quot;Hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>接下来我们来针对上面的代码对调度器里面的结构做一个分析。</p>
 <p>也会经历如上图所示的过程：</p>
 <ol>
 <li><p><strong>创建初始线程和Goroutine</strong>：</p>
@@ -318,7 +316,7 @@
 </li>
 </ul>
 </li>
-<li><p>**启动 <code>m0</code>**：</p>
+<li><p><strong>启动 m0</strong>：</p>
 <ul>
 <li><code>m0</code> 启动后，会绑定到一个 <code>P</code> 上，并从 <code>P</code> 的本地队列中获取 <code>G</code>（Goroutine），即获取到 <code>main goroutine</code>。</li>
 </ul>
@@ -328,7 +326,7 @@
 <li>每个 <code>G</code> 都有自己的栈。<code>M</code> 会根据 <code>G</code> 中的栈信息和调度信息设置运行环境。</li>
 </ul>
 </li>
-<li><p>**运行 <code>G</code>**：</p>
+<li><p><strong>运行 G</strong>：</p>
 <ul>
 <li><code>M</code> 开始运行 <code>G</code>。在这个例子中，<code>main goroutine</code> 会执行 <code>main.main</code> 函数，打印 “Hello world”。</li>
 </ul>
@@ -342,14 +340,9 @@
 </ul>
 </li>
 </ol>
-<h3 id="GMP模型的工作流程-调度策略"><a href="#GMP模型的工作流程-调度策略" class="headerlink" title="GMP模型的工作流程&#x2F;调度策略"></a><strong><code>GMP</code>模型的工作流程&#x2F;调度策略</strong></h3><ul>
-<li><p>**Goroutine (G)**：比作一个快递包裹。</p>
-</li>
-<li><p>**线程 (M)**：比作一个分拣员。</p>
-</li>
-<li><p>**逻辑处理器 (P)**：比作分拣员的工作台。</p>
-</li>
-</ul>
+<h3 id="GMP模型的工作流程-调度策略"><a href="#GMP模型的工作流程-调度策略" class="headerlink" title="GMP模型的工作流程&#x2F;调度策略"></a><strong><code>GMP</code>模型的工作流程&#x2F;调度策略</strong></h3><p> **Goroutine (G)**：比作一个快递包裹。</p>
+<p> **线程 (M)**：比作一个分拣员。</p>
+<p> **逻辑处理器 (P)**：比作分拣员的工作台。</p>
 <ol>
 <li><p><strong>新建 Goroutine（新快递包裹到达）</strong>：</p>
 <ul>
@@ -464,7 +457,7 @@ show_runtime();
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91"><span class="toc-text">串行、并行、并发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%EF%BC%88Process%EF%BC%89%EF%BC%88%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%89"><span class="toc-text">进程（Process）（并行运算，分布式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%EF%BC%88Thread%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">线程（Thread）（并发执行）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">协程（Coroutine）（并发执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Go 协程和线程的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFruntime"><span class="toc-text">什么是runtime?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goroutine-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">goroutine 的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">GMP模型的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">GMP模型的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%98%AF%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5"><span class="toc-text">GMP是系统线程运行的代码片段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-text">复用线程的两个策略：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-text">调度器的工作机制：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84-G0-%E5%92%8C-M0"><span class="toc-text">特殊的 G0 和 M0:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x20"><span class="toc-text"> </span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-text">GMP模型的工作流程&#x2F;调度策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">GMP模型的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div><div class="widget-footer">
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91"><span class="toc-text">串行、并行、并发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%EF%BC%88Process%EF%BC%89%EF%BC%88%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%89"><span class="toc-text">进程（Process）（并行运算，分布式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%EF%BC%88Thread%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">线程（Thread）（并发执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">协程（Coroutine）（并发执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Go 协程和线程的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFruntime"><span class="toc-text">什么是runtime?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goroutine-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">goroutine 的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">GMP模型的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">GMP模型的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%98%AF%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5"><span class="toc-text">GMP是系统线程运行的代码片段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-text">复用线程的两个策略：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-text">调度器的工作机制：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84-G0-%E5%92%8C-M0"><span class="toc-text">特殊的 G0 和 M0:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-text">GMP模型的工作流程&#x2F;调度策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">GMP模型的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div><div class="widget-footer">
 
 <a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>Scroll to Top</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>Join Discussion</span></a></div></widget>
 </div></aside><div class='float-panel blur'>
