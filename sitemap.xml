@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://ginayy.github.io/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)/index.html</loc>
+    <loc>http://ginayy.github.io/wiki/stellar/index.html</loc>
+    
+    <lastmod>2024-11-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://ginayy.github.io/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)%E3%80%81GMP%E6%A8%A1%E5%9E%8B/index.html</loc>
     
     <lastmod>2024-11-13</lastmod>
     
@@ -66,15 +75,6 @@
   
   <url>
     <loc>http://ginayy.github.io/notes/index.html</loc>
-    
-    <lastmod>2024-11-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://ginayy.github.io/wiki/stellar/index.html</loc>
     
     <lastmod>2024-11-07</lastmod>
     
@@ -148,7 +148,7 @@
 
   <url>
     <loc>http://ginayy.github.io/</loc>
-    <lastmod>2024-11-13</lastmod>
+    <lastmod>2024-11-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
