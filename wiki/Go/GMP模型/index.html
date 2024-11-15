@@ -17,32 +17,24 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
   
-  <title>Go: goroutine(协程) - 0xGINA's Blog</title>
+  <title>Go: GMP模型 - 0xGINA's Blog</title>
 
   
-    <meta name="description" content="串行、并行、并发 让我们想象一个人慢跑。当他晨跑时，假设他的鞋带解开了。现在这个人停止了跑步，系好鞋带，然后又开始跑步。这是并发的一个典型示例。这个人能够处理跑步和系鞋带，也就是说，这个人能够同时处理很多事情。  并行指的是多个事情在 同一个时间点&#x20;&#x4E0A;同时发生了。  并发指的是多个事情在 同一时间段&#x20;&#x5185;同时发生了。   Go 是一种并发语言，而不是一">
+    <meta name="description" content="GMP模型的工作原理 **Goroutine (G)**：比作一个快递包裹。  **线程 (M)**：比作一个分拣员。  **逻辑处理器 (P)**：比作分拣员的工作台。   G与M的绑定机制：  （包裹和分拣员的关系）： 想象一下，快递包裹（Goroutine）送到分拣中心后，并不是直接交给某个分拣员（线程），而是先放在分拣员的工作台（逻辑处理器 P）上的包裹堆里。分拣员（M）会从自己工作台上的">
 <meta property="og:type" content="website">
-<meta property="og:title" content="goroutine(协程)">
-<meta property="og:url" content="http://ginayy.github.io/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)%E3%80%81GMP%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:title" content="GMP模型">
+<meta property="og:url" content="http://ginayy.github.io/wiki/Go/GMP%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="0xGINA&#39;s Blog">
-<meta property="og:description" content="串行、并行、并发 让我们想象一个人慢跑。当他晨跑时，假设他的鞋带解开了。现在这个人停止了跑步，系好鞋带，然后又开始跑步。这是并发的一个典型示例。这个人能够处理跑步和系鞋带，也就是说，这个人能够同时处理很多事情。  并行指的是多个事情在 同一个时间点&#x20;&#x4E0A;同时发生了。  并发指的是多个事情在 同一时间段&#x20;&#x5185;同时发生了。   Go 是一种并发语言，而不是一">
+<meta property="og:description" content="GMP模型的工作原理 **Goroutine (G)**：比作一个快递包裹。  **线程 (M)**：比作一个分拣员。  **逻辑处理器 (P)**：比作分拣员的工作台。   G与M的绑定机制：  （包裹和分拣员的关系）： 想象一下，快递包裹（Goroutine）送到分拣中心后，并不是直接交给某个分拣员（线程），而是先放在分拣员的工作台（逻辑处理器 P）上的包裹堆里。分拣员（M）会从自己工作台上的">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125052.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125116.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125134.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125151.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125210.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125232.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125250.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125308.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125330.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125347.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125645.png">
-<meta property="article:published_time" content="2024-11-15T16:58:26.107Z">
-<meta property="article:modified_time" content="2024-11-15T16:58:26.107Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125712.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125728.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125802.png">
+<meta property="article:published_time" content="2024-11-15T16:58:14.711Z">
+<meta property="article:modified_time" content="2024-11-15T16:58:14.711Z">
 <meta property="article:author" content="GINA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125052.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125712.png">
   
   
   
@@ -63,7 +55,7 @@
 </head>
 <body><div class="sitebg"><div class="siteblur"></div></div>
 
-
+<div class="l_cover wiki"><article class="cover-wrap md-text"><div class="preview cover"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/image/go.jpg"/></div><div class="cover-title"><span>Golang</span></div><div class="description">我的Go学习笔记-不断改进和完善中</div><div class="start-wrap"><a class="button start gradient" href="#start">Getting Started</a></div></article></div><hr>
 
 <div class="l_body s:aa content tech" id="start" layout="page" ><aside class="l_left"><div class="leftbar-container">
 
@@ -78,7 +70,7 @@
 </div>
 <div class="widgets">
 
-<widget class="widget-wrapper post-list"><div class="widget-body fs14"><a class="link" href="/wiki/Go/GMP%E6%A8%A1%E5%9E%8B/index.html#start"><span class="toc-text">GMP模型</span></a><a class="link active" href="/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)%E3%80%81GMP%E6%A8%A1%E5%9E%8B/index.html"><span class="toc-text">goroutine(协程)</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/Go/%E5%87%BD%E6%95%B0%E3%80%81init%E5%87%BD%E6%95%B0%E3%80%81%E5%8C%85%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/index.html"><span class="toc-text">函数、init函数、包、闭包、错误处理</span></a><a class="link" href="/wiki/Go/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html"><span class="toc-text">Go基础语法</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-body fs14"><a class="link active" href="/wiki/Go/GMP%E6%A8%A1%E5%9E%8B/index.html#start"><span class="toc-text">GMP模型</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)%E3%80%81GMP%E6%A8%A1%E5%9E%8B/index.html"><span class="toc-text">goroutine(协程)</span></a><a class="link" href="/wiki/Go/%E5%87%BD%E6%95%B0%E3%80%81init%E5%87%BD%E6%95%B0%E3%80%81%E5%8C%85%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/index.html"><span class="toc-text">函数、init函数、包、闭包、错误处理</span></a><a class="link" href="/wiki/Go/%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/index.html"><span class="toc-text">Go基础语法</span></a></div></widget>
 
 
 
@@ -95,120 +87,194 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">Home</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki">Wiki</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Go/GMP%E6%A8%A1%E5%9E%8B/index.html">Go</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">Updated on: <time datetime="2024-11-15T16:58:26.107Z">2024-11-16</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">Updated on: <time datetime="2024-11-15T16:58:14.711Z">2024-11-16</time></span></div></div></div>
     
     <div class="bottom only-title">
       
       <div class="text-area">
-        <h1 class="text title"><span>goroutine(协程)</span></h1>
+        <h1 class="text title"><span>GMP模型</span></h1>
         
       </div>
     </div>
     
   </div>
-  </div><article class="md-text content"><h3 id="串行、并行、并发"><a href="#串行、并行、并发" class="headerlink" title="串行、并行、并发"></a>串行、并行、并发</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125052.png"></p>
-<p>让我们想象一个人慢跑。当他晨跑时，假设他的鞋带解开了。现在这个人停止了跑步，系好鞋带，然后又开始跑步。这是并发的一个典型示例。这个人能够处理跑步和系鞋带，也就是说，这个人能够同时处理很多事情。</p>
-<ul>
-<li><p>并行指的是多个事情在 <strong>同一个时间点&#x20;</strong>&#x4E0A;同时发生了。</p>
-</li>
-<li><p>并发指的是多个事情在 <strong>同一时间段&#x20;</strong>&#x5185;同时发生了。</p>
-</li>
-</ul>
-<p><strong>Go 是一种并发语言，而不是一种并行语言。</strong></p>
-<h3 id="进程（Process）（并行运算，分布式）"><a href="#进程（Process）（并行运算，分布式）" class="headerlink" title="进程（Process）（并行运算，分布式）"></a>进程（Process）（并行运算，分布式）</h3><ul>
-<li><p><strong>定义</strong>：进程就是程序在操作系统中的一次执行过程，是系统进行资源调度和分配的基本单位。每个进程都有自己的一套独立的地址空间，这意味着进程间的内存是不共享的，每个进程都像是操作系统中的一个独立实体。比如，你打开一个浏览器，这就是一个进程；再打开一个文档编辑器，这是另一个进程。每个进程都有自己的空间，不会互相干扰。</p>
-</li>
-<li><p><strong>资源</strong>：进程拥有独立的资源，包括内存、文件描述符、环境变量等。</p>
-</li>
-<li><p><strong>调度</strong>：进程由操作系统进行调度，操作系统决定哪个进程在何时运行。</p>
-</li>
-</ul>
-<p>单道批处理系统内存中始终只保持一道作业，cpu 只能将内存中作业执行完毕，才能执行下一道作业，进程之间串行执行，A、B、C 三个进程按顺序执行</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125116.png"></p>
-<p>分时系统引申出了时间片的概念，进程按照调度算法分时间片在 CPU 上执行，A、B、C 三个进程按照时间片并发执行</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125134.png"></p>
-<h3 id="线程（Thread）（并发执行）"><a href="#线程（Thread）（并发执行）" class="headerlink" title="线程（Thread）（并发执行）"></a>线程（Thread）（并发执行）</h3><p>在进程的基础上再细分出线程，线程比进程更轻量，线程之间的通信也更为便捷，任务的最小载体变成了线程。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125151.png"></p>
-<ul>
-<li><p><strong>定义</strong>：线程是进程中的一个实体，是被系统独立调度和分派的基本单位，是程序执行的一个最小单位。线程自身不拥有系统资源，只拥有一点在运行中必不可少的资源（如执行栈），但它可以与同属一个进程的其他线程共享进程所拥有的全部资源。</p>
-</li>
-<li><p><strong>并行执行</strong>：在多核处理器上，同一个进程中的多个线程可以并行执行，即同时在不同的处理器上运行。</p>
-</li>
-<li><p><strong>共享资源</strong>：同一进程内的线程共享进程的资源，包括内存、文件句柄等，但每个线程有自己的程序计数器、寄存器和堆栈。</p>
-</li>
-</ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125210.png"></p>
-<p>&#x20; CPU 内核负责调度，为系统提供并发处理能力。</p>
-<p>&#x20; 协程是在用户空间实现的， CPU 并不知道有 “用户态线程” 的存在，CPU 只知道它运行的是一个 “内核态线程”。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125232.png"></p>
-<p>这里我们可以把 内核线程依然叫“线程(thread)”，用户线程叫“协程(co-routine)”。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125250.png"></p>
-<p>&#x20;</p>
-<p>&#x20;线程越多，进程利用(或者)抢占的cpu资源就越高。</p>
-<p>&#x20; 进程和线程的创建、切换和销毁都会消耗大量 CPU 资源。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125308.png"></p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125330.png"></p>
-<p>&#x20; 每个线程约需 4MB 内存，大量线程会导致内存消耗过高。应用层无法直接控制内核调度，只能通过减少线程创建和切换来优化性能。这促生了<strong>协程</strong>的概念：用户级别的轻量线程。</p>
-<h3 id="协程（Coroutine）（并发执行）"><a href="#协程（Coroutine）（并发执行）" class="headerlink" title="协程（Coroutine）（并发执行）"></a>协程（Coroutine）（并发执行）</h3><ul>
-<li><p><strong>定义</strong>：协程是一种程序组件，它允许挂起和恢复执行。goroutine是由<strong>Go运行时管理的轻量级线程</strong>，与coroutine只能运行在一个线程上不同，<strong>goroutine可以运行在一个或多个线程上</strong>。</p>
-</li>
-<li><p><strong>轻量级</strong>：goroutine比线程更加轻量级，因为它们的栈是动态的，并且可以在运行时调整大小，它们的堆栈大小只有几 kb，并且堆栈可以根据应用程序的需要进行扩展和收缩，而对于线程，则必须指定堆栈大小并固定堆栈大小。</p>
-</li>
-<li><p><strong>并发执行</strong>：在Go语言中，goroutine可以在单个操作系统线程中并发执行，Go运行时会负责调度这些goroutine，让它们在线程之间高效地共享和切换。</p>
-</li>
-<li><p><strong>共享资源</strong>：多个goroutine共享同一个线程的资源，但拥有自己的栈和寄存器。它们通过channel进行通信，这是一种同步机制，可以用来传递数据和同步goroutine。</p>
-</li>
-</ul>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125347.png"></p>
-<h3 id="Go-协程和线程的区别"><a href="#Go-协程和线程的区别" class="headerlink" title="Go 协程和线程的区别"></a>Go 协程和线程的区别</h3><p>Go 语言引入了 <code>goroutine</code>（协程），它是一个比线程更轻量级的并发执行单元。</p>
-<ul>
-<li><p><strong>更小的内存占用</strong>：</p>
-<ul>
-<li><p>每个线程的栈内存通常是固定的（通常为 1MB 或更多）。</p>
-</li>
-<li><p><code>goroutine</code> 的栈内存默认仅占用约 2KB，可以根据需要自动增长和收缩。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>调度机制不同</strong>：</p>
-<ul>
-<li><p>线程由操作系统调度，切换线程的开销较大，因为需要在用户态和内核态之间切换。</p>
-</li>
-<li><p><code>goroutine</code> 是由 Go 运行时（runtime）调度的，属于用户态调度，切换开销更小。</p>
-</li>
-</ul>
-<h5 id="什么是runtime"><a href="#什么是runtime" class="headerlink" title="什么是runtime?"></a>什么是runtime?</h5><p>Go语言程序执行的环境，它提供了一些底层服务，<code>并发支持(goroutine)和协程调度</code>，<code>垃圾回收</code>，<code>内存管理</code>，<code>反射</code>,<code>网络和文件I/O</code>。</p>
-</li>
-<li><p><strong>数量可达数十万</strong>：</p>
-<ul>
-<li><p>创建一个线程的系统开销很大，不适合大规模并发。</p>
-</li>
-<li><p><code>goroutine</code> 非常轻量，因此可以轻松创建成千上万个 <code>goroutine</code>，并发处理大量任务。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="goroutine-的基本使用"><a href="#goroutine-的基本使用" class="headerlink" title="goroutine 的基本使用"></a>goroutine 的基本使用</h3><p><code>goroutine</code> 是 Go 中的轻量级线程，启动一个 <code>goroutine</code> 只需要使用 <code>go</code> 关键字，非常高效。每个 <code>goroutine</code> 都是独立的，多个 <code>goroutine</code> 可以并发执行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (  </span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func hello() &#123;  </span><br><span class="line">    fmt.Println(&quot;Hello world goroutine&quot;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">func main() &#123;  </span><br><span class="line">    go hello()</span><br><span class="line">    fmt.Println(&quot;main function&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func printNumbers() &#123;</span><br><span class="line">    for i := 1; i &lt;= 5; i++ &#123;</span><br><span class="line">        fmt.Println(i)</span><br><span class="line">        time.Sleep(100 * time.Millisecond) // 延迟 100 毫秒</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    go printNumbers() // 启动一个新的 goroutine，并发执行 printNumbers 函数</span><br><span class="line">    fmt.Println(&quot;这是在主 goroutine 中&quot;)</span><br><span class="line"></span><br><span class="line">    time.Sleep(600 * time.Millisecond) // 等待 printNumbers 执行完</span><br><span class="line">    fmt.Println(&quot;主 goroutine 结束&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这是在主 goroutine 中</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">主 goroutine 结束</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="GMP模型的基本概念"><a href="#GMP模型的基本概念" class="headerlink" title="GMP模型的基本概念"></a>GMP模型的基本概念</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125645.png"></p>
+  </div><article class="md-text content"><h3 id="GMP模型的工作原理"><a href="#GMP模型的工作原理" class="headerlink" title="GMP模型的工作原理"></a>GMP模型的工作原理</h3><p> **Goroutine (G)**：比作一个快递包裹。</p>
+<p> **线程 (M)**：比作一个分拣员。</p>
+<p> **逻辑处理器 (P)**：比作分拣员的工作台。</p>
+<hr>
 <ol>
-<li><p><strong>G（Goroutine）</strong>：表示 <code>goroutine</code>，即 Go 语言中的协程。</p>
+<li><strong>G与M的绑定机制</strong>：</li>
+</ol>
+<p><strong>（包裹和分拣员的关系）</strong>：</p>
+<p>想象一下，快递包裹（Goroutine）送到分拣中心后，并不是直接交给某个分拣员（线程），而是先放在分拣员的工作台（逻辑处理器 P）上的包裹堆里。分拣员（M）会从自己工作台上的包裹堆里拿包裹来分拣。</p>
+<p>Goroutine并不直接绑定到操作系统线程上，而是通过P来调度。当一个M需要执行工作时，它会从与之关联的P的本地队列中取出一个Goroutine来执行。如果M完成了G的执行或者G被阻塞，M会再次从P的队列中取出另一个G来执行。</p>
+<ol start="2">
+<li><strong>P的本地运行队列</strong>：</li>
+</ol>
+<p><strong>（工作台上的包裹堆）</strong>：</p>
+<p>每个分拣员的工作台（P）上都有一个包裹堆，用来存放等待分拣的包裹。如果分拣员的工作台上没有包裹了，他会去中心的包裹池（全局运行队列）里拿，或者从其他分拣员的工作台上“偷”几个包裹来分拣，这就是工作窃取。</p>
+<p>每个P都有一个本地运行队列，用于存储准备好执行的Goroutine。当P的本地队列为空时，它会尝试从全局运行队列或者其他P的本地队列中“偷取”Goroutine来执行，这种策略称为工作窃取（<strong>Work Stealing</strong>）。</p>
+<ol start="3">
+<li><strong>M的休眠与唤醒</strong>：</li>
+</ol>
+<p><strong>（分拣员的休息与工作）</strong>：</p>
+<p>如果一个分拣员发现自己工作台上没有包裹了，而且中心的包裹池里也没有包裹，他可能会暂时休息，不消耗体力。如果有新的包裹送来，或者有包裹从其他工作台“偷”过来，休息的分拣员会被叫醒来继续工作。</p>
+<p>当M在其关联的P的本地队列中找不到可运行的G时，它可能会进入休眠状态。在休眠状态下，M不会消耗CPU资源。当新的Goroutine被创建或者有Goroutine变为可运行状态时，休眠中的M可以被唤醒来处理这些任务。</p>
+<ol start="4">
+<li><strong>G的状态转换</strong>：</li>
+</ol>
+<p><strong>（包裹的处理过程）</strong>：</p>
+<ul>
+<li><p>快递包裹在分拣过程中会经历几个状态：</p>
+<ul>
+<li><p><strong>可运行（Runnable）</strong>：包裹刚送到，等待分拣。</p>
 </li>
-<li><p><strong>P（Processor）</strong>：P代表逻辑处理器，它是一个抽象的概念，并不是真正的物理CPU。P负责维护一个Goroutine队列，调度Goroutine到M上执行。P的数量通常等于CPU的核心数，可以通过<code>GOMAXPROCS</code>参数来设置。每个 <code>P</code> 负责调度和执行多个 <code>goroutine</code>。包含运行Goroutine的资源和本地队列。</p>
+<li><p><strong>运行中（Running）</strong>：分拣员正在分拣这个包裹。</p>
 </li>
-<li><p><strong>M（Machine）</strong>：表示系统线程（即操作系统的内核线程），是执行Goroutine的实体。负责执行 <code>P</code> 中分配的 <code>goroutine</code>。<code>M</code> 通过 <code>P</code> 把 <code>goroutine</code> 绑定到内核线程上执行。当 <code>P</code> 空闲时，可以调度其他 <code>goroutine</code> 执行。</p>
+<li><p><strong>休眠（Waiting）</strong>：包裹需要等待某些条件（比如等待特殊处理或者检查）。</p>
 </li>
-<li><p><strong>P 的本地队列</strong> ：每个逻辑处理器（P）都有一个本地队列，用于存放等待运行的 Goroutine（G）。这个本地队列的大小是有限的，通常不超过 256 个 Goroutine。这种设计旨在减少锁的使用，提高调度效率，因为访问本地队列不需要加锁。</p>
+<li><p><strong>死亡（Dead）</strong>：包裹已经分拣完毕，可以送出去了。</p>
 </li>
-<li><p>**全局队列&#x20;**： 用于存放那些因为本地队列已满而无法加入的 Goroutine。全局队列是一个共享资源，所有逻辑处理器（P）都可以从中获取 Goroutine 来执行。</p>
+</ul>
+</li>
+<li><p>如果包裹在分拣过程中需要等待（比如等待检查），分拣员会先放下这个包裹，去分拣其他包裹。这就像是 Goroutine 在执行过程中遇到会导致阻塞的操作时，它会从分拣员（M）上解绑并进入休眠状态。</p>
+</li>
+<li><p>一旦等待的条件满足，分拣员会回来继续分拣这个包裹。这就像是阻塞的操作完成后，Goroutine 会变回可运行状态，并等待被调度器重新分配到分拣员（M）上执行。</p>
+</li>
+</ul>
+<p>Goroutine在其生命周期中会经历几种状态，包括可运行（Runnable）、运行中（Running）、休眠（Waiting）和死亡（Dead）。当G在执行过程中遇到会导致阻塞的操作时，它会从M上解绑并进入休眠状态，等待被唤醒。一旦阻塞的操作完成，G会变回可运行状态，并等待被调度器重新分配到M上执行。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125712.png"></p>
+<h3 id="GMP是系统线程运行的代码片段"><a href="#GMP是系统线程运行的代码片段" class="headerlink" title="GMP是系统线程运行的代码片段"></a><code>GMP</code>是系统线程运行的代码片段</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125728.png"></p>
+<h3 id="设计策略"><a href="#设计策略" class="headerlink" title="设计策略"></a>设计策略</h3><h4 id="复用线程的两个策略："><a href="#复用线程的两个策略：" class="headerlink" title="复用线程的两个策略："></a><strong>复用线程的两个策略</strong>：</h4><ol>
+<li><p><strong>Work Stealing机制</strong>： 当本线程无可运行的G时，尝试从其他线程绑定的P偷取G，而不是销毁线程。</p>
+</li>
+<li><p><strong>Hand Off机制</strong>：当本线程因G进行系统调用等阻塞时，线程会释放绑定的P，把P转移给其他空闲的M执行。</p>
 </li>
 </ol>
+<p><strong>利用并行</strong>：<code>GOMAXPROCS</code>设置P的数量，最多有<code>GOMAXPROCS</code>个线程分布在多个CPU上同时运行。<code>GOMAXPROCS</code>也限制了并发的程度，比如<code>GOMAXPROCS = 核数/2</code>，则最多利用了一半的CPU核进行并行。</p>
+<h4 id="调度器的工作机制："><a href="#调度器的工作机制：" class="headerlink" title="调度器的工作机制："></a><strong>调度器的工作机制：</strong></h4><p>想象一下，你在一个公共场合，大家都在排队上厕所。这里有两种情况：</p>
+<ol>
+<li><strong>协作式调度：</strong></li>
+</ol>
+<p>每个人都知道自己大概需要多久，如果有人预计自己会占用比较长时间，比如要“大号”，他们会主动告诉后面的人：“我可能需要很久，你们可以先去别的厕所看看。”这样，其他人就有机会先去别的厕所，这就是协作式调度。在 Go 语言中，Goroutine 在执行长时间任务时，会主动让出 CPU，让其他 Goroutine 先执行。</p>
+<p>&#x20;Go 语言使用协作式调度机制，意味着 g 在某些特定点（如系统调用、I&#x2F;O 操作）会主动让出 CPU，从而使调度器有机会调度其他 g  执行。这种机制减少了不必要的上下文切换，提高了调度效率。</p>
+<ul>
+<li><strong>抢占式调度：</strong> &#x20;</li>
+</ul>
+<p>但是，有时候有些人进去后，可能因为玩手机或者别的原因，占用厕所时间过长。管理员（调度器）看不下去了，就会敲门说：“你已经待很久了，快点出来，外面还有人等着呢。”这就是抢占式调度。在 Go 语言中，如果一个 Goroutine 占用 CPU 太久，调度器会强制中断它，让其他 Goroutine 有机会执行。</p>
+<p>为了防止某个 g 长时间占用 CPU 资源，Go 语言在 1.14 版本中引入了抢占式调度。如果一个 g 占用 CPU 时间过长，调度器会强制中断其执行，并将控制权交还给调度器，确保其他 g 能够得到执行机会。</p>
+<h4 id="特殊的-G0-和-M0"><a href="#特殊的-G0-和-M0" class="headerlink" title="特殊的 G0 和 M0:"></a>特殊的 G0 和 M0:</h4><ol>
+<li><p><strong>G0</strong>：每个线程（M）启动时都会创建一个特殊的 Goroutine（G0），它用于调度和系统调用，不指向任何用户代码。G0 在调度器需要执行系统调用或者进行调度操作时使用。</p>
+</li>
+<li><p><strong>M0</strong>：程序启动后的第一个主线程（M0）负责执行初始化操作和启动第一个 Goroutine。此后，M0 的行为与其他线程（M）相同。</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Println(&quot;Hello world&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>接下来我们来针对上面的代码对调度器里面的结构做一个分析。</p>
+<p>也会经历如上图所示的过程：</p>
+<ol>
+<li><p><strong>创建初始线程和Goroutine</strong>：</p>
+<ul>
+<li>Go 程序启动时，runtime 包会创建一个初始线程 <code>m0</code> 和一个特殊的 Goroutine <code>g0</code>。<code>g0</code> 是每个线程的调度器 Goroutine，用于执行系统调用和调度操作。</li>
+</ul>
+</li>
+<li><p><strong>调度器初始化</strong>：</p>
+<ul>
+<li>初始化线程 <code>m0</code>、栈、垃圾回收器，以及创建由 <code>GOMAXPROCS</code>（可以设置的，决定了同时运行的线程数）个 <code>P</code>（Processor，逻辑处理器）构成的 <code>P</code> 列表。每个 <code>P</code> 都与一个 <code>M</code>（Machine，物理线程）关联。</li>
+</ul>
+</li>
+<li><p><strong>main函数的调用</strong>：</p>
+<ul>
+<li><p>示例代码中的 <code>main</code> 函数是用户定义的 <code>main.main</code>，而在 runtime 包中也有一个 <code>main</code> 函数，即 <code>runtime.main</code>。编译后的代码会将 <code>runtime.main</code> 调用 <code>main.main</code>。</p>
+</li>
+<li><p>程序启动时，会为 <code>runtime.main</code> 创建一个 Goroutine，我们可以称之为 <code>main goroutine</code>。这个 Goroutine 会被加入到 <code>P</code> 的本地队列中。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>启动 m0</strong>：</p>
+<ul>
+<li><code>m0</code> 启动后，会绑定到一个 <code>P</code> 上，并从 <code>P</code> 的本地队列中获取 <code>G</code>（Goroutine），即获取到 <code>main goroutine</code>。</li>
+</ul>
+</li>
+<li><p><strong>设置运行环境</strong>：</p>
+<ul>
+<li>每个 <code>G</code> 都有自己的栈。<code>M</code> 会根据 <code>G</code> 中的栈信息和调度信息设置运行环境。</li>
+</ul>
+</li>
+<li><p><strong>运行 G</strong>：</p>
+<ul>
+<li><code>M</code> 开始运行 <code>G</code>。在这个例子中，<code>main goroutine</code> 会执行 <code>main.main</code> 函数，打印 “Hello world”。</li>
+</ul>
+</li>
+<li><p><strong><code>G</code> 退出和循环</strong>：</p>
+<ul>
+<li><p>当 <code>G</code> 执行完毕后，<code>M</code> 会尝试获取下一个可运行的 <code>G</code>。这个过程会一直重复，直到 <code>main.main</code> 退出。</p>
+</li>
+<li><p>一旦 <code>main.main</code> 退出，<code>runtime.main</code> 会执行任何延迟函数（Defer）和 Panic 处理，或者调用 <code>runtime.exit</code> 来退出程序。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="GMP模型的工作流程-调度策略"><a href="#GMP模型的工作流程-调度策略" class="headerlink" title="GMP模型的工作流程&#x2F;调度策略"></a><strong><code>GMP</code>模型的工作流程&#x2F;调度策略</strong></h3><p> **Goroutine (G)**：比作一个快递包裹。</p>
+<p> **线程 (M)**：比作一个分拣员。</p>
+<p> **逻辑处理器 (P)**：比作分拣员的工作台。</p>
+<ol>
+<li><p><strong>新建 Goroutine（新快递包裹到达）</strong>：</p>
+<ul>
+<li><p>当新的快递包裹（Goroutine）送到分拣中心时，调度器会优先将这些包裹放到当前分拣员（P）的工作台上（本地队列）。如果工作台上的包裹已经很多了，超出了一定数量，那么一半的包裹会被移动到中心的包裹池（全局队列）中，以便其他分拣员可以处理。</p>
+</li>
+<li><p>通过<code>go func()</code>创建一个协程，调度器会将其视为一个新的任务，并优先放入当前逻辑处理器（P）的本地队列（Local RunQueue）中。如果本地队列已满，会将一半的（G）移动到全局队列中。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://raw.githubusercontent.com/GINAYY/PicGoImg/main/PicGoImg20241113125802.png"></p>
+<ol start="2">
+<li><p><strong>优先本地队列调度（分拣员优先处理自己工作台上的包裹）</strong>：</p>
+<ul>
+<li><p>分拣员（M）在工作时，会优先处理自己工作台上的快递包裹（从绑定的 P 的本地队列中获取 G 进行执行）。这种方式不需要分拣员之间互相沟通，提高了分拣效率，因为每个分拣员都专注于自己的工作台。</p>
+</li>
+<li><p>线程（M）在需要执行 Goroutine 时，会优先从其绑定的逻辑处理器（P）的本地队列中获取 Goroutine 进行执行。这种方式避免了锁的使用，提高了调度效率。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>全局队列调度（分拣员从中心包裹池获取包裹）</strong>：</p>
+<ul>
+<li><p>如果分拣员发现自己工作台上的包裹都处理完了，他们会去中心的包裹池（全局队列）看看有没有新的包裹可以处理。这个过程需要分拣员之间协调（加锁），虽然比直接处理自己工作台上的包裹慢一些，但可以确保整个分拣中心的包裹都能得到处理，保持负载均衡。</p>
+</li>
+<li><p>如果逻辑处理器（P）的本地队列为空，线程（M）会尝试从全局队列（Global RunQueue）中获取 Goroutine。访问全局队列需要加锁，这是一个相对较慢的过程，但它确保了系统的负载均衡。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>工作窃取（分拣员从其他工作台“偷”包裹）</strong>：</p>
+<ul>
+<li><p>如果分拣员发现自己工作台上和中心包裹池里都没有包裹了，而其他分拣员的工作台上还有包裹，他们可以走过去，从其他分拣员的工作台上“偷”一些包裹来处理。这样可以避免一些分拣员太忙而其他分拣员太闲的情况，确保所有分拣员都能保持忙碌。</p>
+</li>
+<li><p>如果线程（M）从逻辑处理器（P）的本地队列和全局队列都无法获取到 Goroutine，它会尝试从其他逻辑处理器的本地队列中“偷取”一部分 Goroutine 来执行，这种策略称为工作窃取（<strong>Work Stealing</strong>）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Goroutine 的阻塞与唤醒（快递包裹因特殊处理而暂时搁置）</strong>：</p>
+<ul>
+<li><p>当快递包裹在分拣过程中需要等待某些特殊处理（比如等待检查或者需要特别的分拣规则），分拣员会暂时将这个包裹放到一边，去处理其他包裹。这就像是 Goroutine 在执行过程中遇到会导致阻塞的操作时，它会从分拣员（M）上解绑并进入休眠状态。</p>
+</li>
+<li><p>一旦需要等待的特殊处理完成，这个包裹会被重新放回某个分拣员的工作台上（P 的本地队列），等待下一个可用的分拣员（M）来继续处理。</p>
+</li>
+<li><p>当 Goroutine 在执行过程中遇到会导致阻塞的操作（如 I&#x2F;O 操作或系统调用），它会从线程（M）上解绑并进入休眠状态（Waiting State）。一旦阻塞的操作完成，Goroutine 会被唤醒，并变回可运行状态（Runnable State），等待被调度器重新分配到线程（M）上执行。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="GMP模型的优势"><a href="#GMP模型的优势" class="headerlink" title="GMP模型的优势"></a>GMP模型的优势</h3><ul>
+<li><p><strong>高效的资源利用</strong>：通过在用户态进行调度，避免了频繁的上下文切换带来的开销，充分利用CPU资源。</p>
+</li>
+<li><p><strong>轻量级并发</strong>：Goroutine比线程更加轻量级，可以启动大量的Goroutine而不会消耗大量内存。</p>
+</li>
+<li><p><strong>自动调度</strong>：Go运行时自动管理Goroutine的调度，无需程序员手动干预，简化了并发编程的复杂度。</p>
+</li>
+</ul>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6936486914568486943">操作系统篇一:进程与线程、并发并行与串行、同步与异步、阻塞与非阻塞当你被问到这些问题:你觉得的并发、并行、串行有什么区别 - 掘金</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.bookstack.cn/read/aceld-golang/3%E3%80%81%E5%AF%B9%E4%BA%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%80%8C%E8%A8%80%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E4%BB%A5%E5%8F%8AGoroutine%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB.md">第三篇、Golang编程设计与通用之路 - 3、对于操作系统而言进程、线程以及Goroutine协程的区别 - 《Golang 修养之路》 - 书栈网 · BookStack</a></p>
 <p>翻译来自 <a target="_blank" rel="noopener" href="https://golangbot.com/goroutines/">Goroutines</a></p>
@@ -217,7 +283,7 @@
 
 <div class="article-footer fs14"></div>
 </article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">Prev</div><a href="/wiki/Go/GMP%E6%A8%A1%E5%9E%8B/index.html">GMP模型</a></div><div class="item" id="next"><div class="note">Next</div><a href="/wiki/Go/%E5%87%BD%E6%95%B0%E3%80%81init%E5%87%BD%E6%95%B0%E3%80%81%E5%8C%85%E3%80%81%E9%97%AD%E5%8C%85%E3%80%81%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/index.html">函数、init函数、包、闭包、错误处理</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">Next</div><a href="/wiki/Go/goroutine(%E5%8D%8F%E7%A8%8B)%E3%80%81GMP%E6%A8%A1%E5%9E%8B/index.html">goroutine(协程)</a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
@@ -268,7 +334,7 @@ show_runtime();
 
 
 
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E8%A1%8C%E3%80%81%E5%B9%B6%E8%A1%8C%E3%80%81%E5%B9%B6%E5%8F%91"><span class="toc-text">串行、并行、并发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%EF%BC%88Process%EF%BC%89%EF%BC%88%E5%B9%B6%E8%A1%8C%E8%BF%90%E7%AE%97%EF%BC%8C%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%89"><span class="toc-text">进程（Process）（并行运算，分布式）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%EF%BC%88Thread%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">线程（Thread）（并发执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89%EF%BC%88%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-text">协程（Coroutine）（并发执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Go-%E5%8D%8F%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Go 协程和线程的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFruntime"><span class="toc-text">什么是runtime?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#goroutine-%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">goroutine 的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">GMP模型的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div><div class="widget-footer">
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">On This Page</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">GMP模型的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%98%AF%E7%B3%BB%E7%BB%9F%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5"><span class="toc-text">GMP是系统线程运行的代码片段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E7%AD%96%E7%95%A5"><span class="toc-text">设计策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%8D%E7%94%A8%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%AD%96%E7%95%A5%EF%BC%9A"><span class="toc-text">复用线程的两个策略：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6%EF%BC%9A"><span class="toc-text">调度器的工作机制：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84-G0-%E5%92%8C-M0"><span class="toc-text">特殊的 G0 和 M0:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B-%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5"><span class="toc-text">GMP模型的工作流程&#x2F;调度策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GMP%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">GMP模型的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div><div class="widget-footer">
 
 <a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>Scroll to Top</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>Join Discussion</span></a></div></widget>
 </div></aside><div class='float-panel blur'>
